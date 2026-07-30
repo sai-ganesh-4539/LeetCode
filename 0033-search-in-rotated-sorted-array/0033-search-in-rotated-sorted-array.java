@@ -1,29 +1,12 @@
 class Solution {
-    public int search(int[] arr, int target) {
-        int low=0;
-        int high=arr.length-1;
-        while(low<=high){
-            int mid=low+(high-low)/2;
-            if(arr[mid]==target){
-                return mid;
-            }
-            if(arr[low]<=arr[mid]){
-                if(arr[low]<=target && arr[mid]>=target){
-                    high=mid-1;
-                }
-                else{
-                    low=mid+1;
-                }
-            }
-            else{
-                if(arr[mid]<=target &&arr[high]>=target){
-                    low=mid+1;
-                }
-                else{
-                    high=mid-1;
-                }
+    public int search(int[] nums, int target) {
+        int n = nums.length;
+        int res = -1;
+        for(int i=0;i<n;i++){
+            if(nums[i]==target){
+                res = i;
             }
         }
-        return -1;
+        return res;
     }
 }
