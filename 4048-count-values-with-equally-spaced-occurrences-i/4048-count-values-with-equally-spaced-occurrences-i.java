@@ -1,16 +1,17 @@
 class Solution {
     public int countSpecialIntegers(int[] nums) {
-        int n = nums.length;
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.putIfAbsent(nums[i], new ArrayList<>());
+            map.get(nums[i]).add(i);
+        }
         int count = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                for (int k = j + 1; k < n; k++) {
-                    if ((nums[i] == nums[j]) && (nums[j] == nums[k]) && (j - i == k - j)) {
-                        int t = 0;
-                        for (int x : nums) if (x == nums[i]) t++;
-                        if (t == 3) count++;
-                    }
-                }
+        for (ArrayList<Integer> x : map.values()) {
+            if (x.size() == 3) {
+                int i = x.get(0);
+                int j = x.get(1);
+                int k = x.get(2);
+                if (j - i == k - j) count++;
             }
         }
         return count;
